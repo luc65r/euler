@@ -3,6 +3,6 @@
 
 # Except
 !.gitignore
-!*.lhs
+!*.md
 !.ghci
 !shell.nix
