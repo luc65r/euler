@@ -14,9 +14,15 @@ m1 = sum . filter (\x -> x `mod` 3 == 0 || x `mod` 5 == 0) $ [1 .. 999]
 ```
 
 `[1 .. 999]` génère la liste des nombres naturels de 1 à 999, comme ceci : `[1, 2, 3, ..., 997, 998, 999]`.
+
 On filtre cette liste avec la fonction anonyme ``\x -> x `mod` 3 == 0 || x `mod` 5 == 0``.
-[//]: # (TODO: expliquer celle lambda expression)
-Et on fait la somme de tous les éléments de la liste.
+Cette fonction est de type `Int -> Bool`, c'est-à-dire qu'elle prend un entier et qu'elle retourne un booléen.
+Elle renvoie `True` si le reste de la division euclidienne (`mod`) de x (l'entier) par 3 est 0, ou si celui de x par 5 est 0. Sinon elle renvoie `False`.
+
+Les \` autour de `mod` sont là parce qu'on utilise la fonction en notation infixée.
+Sans eux, on aurait dû écrire `mod x 3` au lieu de ``x `mod` 3``, ce qui est moins lisible pour certains.
+
+Et on fait la somme de tous les éléments de la liste (`sum`).
 
 ## Compréhension de liste
 
@@ -31,6 +37,7 @@ m2 = sum [x | x <- [1 .. 999], x `mod` 3 == 0 || x `mod` 5 == 0]
 Le problème des méthodes précédentes, c'est qu'elles ne sont pas tellement efficaces ; on appelle `mod` beaucoup de fois, donc le programme risque d'être lent si on lui demande de faire la somme de tous les multiples inférieurs à 1 000 000 000.
 
 La solution, c'est de réfléchir avant de faire le programme !
+
 Pour avoir tous les multiples de 3, il suffit de mutiplier tous les entiers naturels par 3, de même pour 5.
 Le problème c'est que les multiples de 3 et de 5 vont être comptés deux fois, donc il faut enlever les multiples de 15.
 
@@ -41,6 +48,7 @@ m3 = (sum . takeWhile (< 1000) . map (*3) $ [1 ..])
 ```
 
 Ici, `map (*3)` applique `*3` à tous les éléments de la liste infinie `[1 ..]`, et on fait la somme de tous les éléments de la liste tant qu'ils sont inférieurs à 1000.
+
 
 
 Mais il y a plus simple !
