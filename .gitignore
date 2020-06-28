@@ -3,6 +3,10 @@
 
 # Except
 !.gitignore
+!*.lhs
 !*.md
 !.ghci
 !shell.nix
+
+# Even if they are in subdirectories
+!*/
